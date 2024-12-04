@@ -36,7 +36,7 @@ print(
 
 
 def find_valid_and_conditionals(bad_data: str) -> str:
-    valid_codes = re.findall(r"^(do\(\)|mul\(\d{1,3},\d{1,3}\)|don't\(\))", bad_data)
+    valid_codes = re.findall(r"(do\(\)|mul\(\d{1,3},\d{1,3}\)|don't\(\))", bad_data)
     return valid_codes
 
 
