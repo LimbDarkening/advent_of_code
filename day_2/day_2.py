@@ -1,5 +1,5 @@
 # Problem 1
-# %%
+# %% SETUP
 import os
 import os
 import pandas as pd
@@ -13,6 +13,7 @@ with open(file_path) as file:
     for line in file:
         reading = line.split()
         readings.append(reading)
+# %% PROBLEM 1
 
 
 def valid(reading: list[int]) -> bool:
@@ -48,5 +49,22 @@ t2 = time.time()
 print(sum([valid_pd(r) for r in readings]))
 print(f"Time: {time.time() - t2}")
 
+
+# %% PROBLEM 2
+def dampener(reading: list[int]) -> bool:
+    if valid(reading):
+        return True
+
+    for i, r in enumerate(reading):
+        if valid(reading[:i] + reading[i + 1 :]):
+            return True
+    return False
+
+
+import time
+
+t1 = time.time()
+print(sum([dampener(r) for r in readings]))
+print(f"Time: {time.time() - t1}")
 
 # %%
