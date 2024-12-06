@@ -37,3 +37,42 @@ def validate(update: list[int], rules: list[tuple[int, int]]) -> bool:
 
 
 print(sum([validate(update, relevant_rules(update, RULES)) for update in UPDATES]))
+
+
+# %% PROBLEM 2
+def bad_updates(update: list[int], rules: list[tuple[int, int]]) -> bool:
+    for rule in rules:
+        if update.index(rule[0]) > update.index(rule[1]):
+            return update
+
+
+wronguns = [
+    bad_updates(update, relevant_rules(update, RULES))
+    for update in UPDATES
+    if bad_updates(update, relevant_rules(update, RULES)) is not None
+]
+
+
+def swap(ls: list, a: int, b: int):
+    i = ls.index(a)
+    j = ls.index(b)
+    ls[i], ls[j] = ls[j], ls[i]
+    return ls
+
+
+def broken_rules(update: list[int], rules: list[tuple[int, int]]):
+    broken_rules = []
+    for rule in rules:
+        if update.index(rule[0]) > update.index(rule[1]):
+            broken_rules.append(rule)
+    return broken_rules
+
+
+def fix_update(update: list[int], rules: list[tuple[int, int]]):
+    while len(check := broken_rules(update, rules)) > 0:
+        update = swap(update, check[0][0], check[0][1])
+    return update.pop(len(update) // 2)
+
+
+print(sum([fix_update(update, relevant_rules(update, RULES)) for update in wronguns]))
+# %%
