@@ -112,4 +112,7 @@ zeros = [
     if MAP.iloc[i, j] == 0
 ]
 print(sum(zeros))
-# %%
+# %% PROBLEM 2
+
+# To solve problem 2, just remove the check for visited end of trail positions
+# in the above count_valid_trails function.
